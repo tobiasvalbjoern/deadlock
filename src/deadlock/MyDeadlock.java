@@ -51,7 +51,17 @@ public class MyDeadlock {
 	  	            }
 	  	         }	 
 			  }
-			  else {
+	    	  //Avoid deadlock by requesting and releasing locks in the same order
+	    	  //java.util.concurrent.locks.ReentrantLock can be used to
+	    	  // attempt to acquire the locks of both accounts (trylock() ), 
+	    	  //to release the locks if it fails,
+	    	  //and to try again later if necessary.
+	    	  
+	    	  //You can also avoid waiting indefinitely in case of deadlock:
+	    	  //The Javadoc states that the join(time) function will wait 
+	    	  //at most that many milliseconds for the thread to die. 
+	    	  //In effect if the timeout passes your code will stop blocking and continue on. 
+	    	  else {
 				  synchronized (Lock1) {
 			            System.out.println("Thread 2: Holding lock 1...");
 			           
